@@ -3,14 +3,17 @@ import './App.css'
 import {getAllBankStatements} from './service'
 import cors from 'cors'
 import express, { Express, NextFunction, Request, Response } from 'express'
-import {LineChart, PieChart, List, UploadButton} from './components'
+import LineChart from './components/LineChart'
+import PieChart  from './components/PieChart'
+import List  from './components/List'
+import UploadButton  from './components/UploadButton'
 
 function App() {
   //const [data, setData] = useState({ hits: [] });
 
   //useEffect(() => {
   //  (async () => {
-  //      let response = await fetch('http://localhost:8080/api/v1/data')
+  //      let response = await getAllBankStatements()
   //      response = await response.json()
   //      console.log('data', data)
   //      setData(response);
