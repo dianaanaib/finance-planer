@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Pie } from '@ant-design/plots'
+import './index.css'
 
 const PieChart = () => {
   const data = [

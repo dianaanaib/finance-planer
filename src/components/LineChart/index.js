@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Line } from '@ant-design/plots';
+import React, { useState, useEffect } from 'react'
+import { Line } from '@ant-design/plots'
+import './index.css'
 
 //import { uniq, findIndex } from '@antv/util';
 

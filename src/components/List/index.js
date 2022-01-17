@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { List, Skeleton } from 'antd'
+import './index.css'
 
 const TransactionsList = () => {
     const dummy = [
