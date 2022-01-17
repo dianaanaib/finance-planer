@@ -1,34 +1,34 @@
-
-import './App.css'
-import {getAllBankStatements} from './service'
-import cors from 'cors'
-import express, { Express, NextFunction, Request, Response } from 'express'
+import List from './components/List'
 import LineChart from './components/LineChart'
-import PieChart  from './components/PieChart'
-import List  from './components/List'
-import UploadButton  from './components/UploadButton'
+// import UploadButton from './components/UploadButton'
+import { Row, Col } from 'antd'
+import PieChart from './components/PieChart'
+import { Card } from 'antd'
+import './App.css'
+import "antd/dist/antd.css";
 
 function App() {
-  //const [data, setData] = useState({ hits: [] });
-
-  //useEffect(() => {
-  //  (async () => {
-  //      let response = await getAllBankStatements()
-  //      response = await response.json()
-  //      console.log('data', data)
-  //      setData(response);
-  //  })();
-  //}, [])
-
   return (
-    <div className="App">
-      <div className='chartsWrapper'>
-        <PieChart />
-        <LineChart />
-      </div>
-      <List />
+    <div className='chartContainer'>
+      <Row gutter={[25, 25]}>
+        <Col span={12}>
+          <Card bordered={false}>
+            <PieChart />
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card bordered={false}>
+            <LineChart />
+          </Card>
+        </Col>
+        <Col span={24}>
+          <Card className='transactionsList' bordered={false}>
+            <List />
+          </Card>
+        </Col>
+      </Row>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
