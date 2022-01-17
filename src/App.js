@@ -2,28 +2,29 @@
 import './App.css'
 import {getAllBankStatements} from './service'
 import cors from 'cors'
-import express from 'express'
+import express, { Express, NextFunction, Request, Response } from 'express'
+import {LineChart, PieChart, List, UploadButton} from './components'
 
-const createApp = async () => {
-  const app = express();
-  app.use(
-    cors({
-      origin: true,
-      credentials: true,
-    })
+function App() {
+  //const [data, setData] = useState({ hits: [] });
+
+  //useEffect(() => {
+  //  (async () => {
+  //      let response = await fetch('http://localhost:8080/api/v1/data')
+  //      response = await response.json()
+  //      console.log('data', data)
+  //      setData(response);
+  //  })();
+  //}, [])
+
+  return (
+    <div className="App">
+      <div className='chartsWrapper'>
+        <PieChart />
+        <LineChart />
+      </div>
+      <List />
+    </div>
   )
-
-  app.use('/api/v1/data', getAllBankStatements);
-
-  app.get('/*', (req, res, next) => {
-    const err = new Error({
-      message: 'Not found',
-      status: 404,
-    });
-    next(err);
-  });
-
-return app
 }
-
-export default createApp
+export default App
