@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Col, List, Row } from 'antd'
+import { Col, List, Row, Badge } from 'antd'
 
 import './index.css'
 
@@ -9,6 +9,7 @@ const TransactionsList = ({ data }) => {
       return new Date(b?.bankStatement?.date) - new Date(a?.bankStatement?.date)
     })
   }
+
   return (
     <div
       id="scrollableDiv"
@@ -21,14 +22,17 @@ const TransactionsList = ({ data }) => {
         itemLayout="horizontal"
         dataSource={data}
         renderItem={item => {
-          const { bankStatement } = item || {}
+          const { bankStatement, category } = item || {}
           const { date, name: orderName, amount } = bankStatement || {}
           return <List.Item className="ant-list-item-no-flex">
-            <Row>
-              <Col span={4}>{date}</Col>
-              <Col span={4}>{orderName}</Col>
-              <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={16}>{amount}</Col>
-            </Row>
+            <Badge.Ribbon count='' text={category} size='small'>
+              <Row>
+                <Col span={4}>{date}</Col>
+                <Col span={4}>{orderName}</Col>
+                <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={16}>{amount}</Col>
+                <Col span={4}> </Col>
+              </Row>
+            </Badge.Ribbon>
           </List.Item>
         }}
       />

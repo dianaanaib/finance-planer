@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { getAllBankStatements } from './service'
 import List from './components/List'
 import LineChart from './components/LineChart'
-// import UploadButton from './components/UploadButton'
-import { Row, Col } from 'antd'
 import PieChart from './components/PieChart'
-import { Card } from 'antd'
+import { Card, Button, Row, Col } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
+
 import './App.css'
 import "antd/dist/antd.css";
 
@@ -35,7 +35,7 @@ function App() {
           </Card>
         </Col>
         <Col span={24}>
-          <Card className='transactionsList' bordered={false}>
+          <Card extra={<Button icon={<UploadOutlined />}>Click to Upload</Button>} className='transactionsList' bordered={false}>
             <List data={data} />
           </Card>
         </Col>
