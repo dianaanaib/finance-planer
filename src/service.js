@@ -1,4 +1,4 @@
 export async function getAllBankStatements() {
-    const response = await fetch('http://localhost:8080/api/v1/data')
+    const response = await fetch('/api/v1/data', { headers: { 'accept': 'application/json' } })
     return response.json()
 }
