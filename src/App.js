@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react'
+import { getAllBankStatements } from './service'
 import List from './components/List'
 import LineChart from './components/LineChart'
 // import UploadButton from './components/UploadButton'
@@ -8,6 +10,17 @@ import './App.css'
 import "antd/dist/antd.css";
 
 function App() {
+  const [data, setData] = useState(null)
+
+  useEffect(async () => {
+    const result = await getAllBankStatements()
+    setData(result)
+  }, [])
+
+  if (data === null) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className='chartContainer'>
       <Row gutter={[25, 25]}>
@@ -23,7 +36,7 @@ function App() {
         </Col>
         <Col span={24}>
           <Card className='transactionsList' bordered={false}>
-            <List />
+            <List data={data} />
           </Card>
         </Col>
       </Row>
