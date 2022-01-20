@@ -1,34 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Pie } from '@ant-design/plots'
 import './index.css'
 
-const PieChart = () => {
-  const data = [
-    {
-      type: '1',
-      value: 27,
-    },
-    {
-      type: '2',
-      value: 25,
-    },
-    {
-      type: '3',
-      value: 18,
-    },
-    {
-      type: '4',
-      value: 15,
-    },
-    {
-      type: '5',
-      value: 10,
-    },
-    {
-      type: '6',
-      value: 5,
-    },
-  ];
+const PieChart = ({ data: planeData }) => {
+  let data = []
+  const planeCategories = planeData.map(i => i.category)
+  const uniqueCategories = [...new Set(planeCategories)]
+
+  uniqueCategories.map(i => data.push({ type: i, value: 0, count: 0 }))
+
+  console.log('ich', data)
+
+  data.forEach(chartData => {
+    const transactionsQuantity = Object.keys(planeData).length
+
+    planeData.forEach(transaction => (transaction.category === chartData.type)
+      ? chartData.count = chartData.count + 1
+      : null
+    )
+
+    chartData.value = 100 * chartData.count / transactionsQuantity
+  })
+
   const config = {
     appendPadding: 10,
     data,
@@ -37,7 +30,7 @@ const PieChart = () => {
     radius: 0.8,
     label: {
       type: 'outer',
-      content: '{name} {percentage}'
+      content: '{percentage}'
     },
     interactions: [
       {

@@ -26,7 +26,7 @@ function App() {
       <Row gutter={[25, 25]}>
         <Col span={12}>
           <Card bordered={false}>
-            <PieChart />
+            <PieChart data={data} />
           </Card>
         </Col>
         <Col span={12}>
