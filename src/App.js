@@ -31,7 +31,7 @@ function App() {
         </Col>
         <Col span={12}>
           <Card bordered={false}>
-            <LineChart />
+            <LineChart data={data} />
           </Card>
         </Col>
         <Col span={24}>
