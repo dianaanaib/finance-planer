@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Col, List, Row, Badge } from 'antd'
+import { Col, List, Row, Tag } from 'antd'
+import { assignColorByCategory } from '../../utils/colorAssign'
 
 import './index.css'
 
@@ -25,14 +26,12 @@ const TransactionsList = ({ data }) => {
           const { bankStatement, category } = item || {}
           const { date, name: orderName, amount } = bankStatement || {}
           return <List.Item className="ant-list-item-no-flex">
-            <Badge.Ribbon count='' text={category} size='small'>
-              <Row>
-                <Col span={4}>{date}</Col>
-                <Col span={4}>{orderName}</Col>
-                <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={16}>{amount}</Col>
-                <Col span={4}> </Col>
-              </Row>
-            </Badge.Ribbon>
+            <Row>
+              <Col span={4}>{date}</Col>
+              <Col span={4}>{orderName}</Col>
+              <Col span={1}><Tag color={assignColorByCategory(category)}>{category}</Tag></Col>
+              <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={15}>{amount}</Col>
+            </Row>
           </List.Item>
         }}
       />
