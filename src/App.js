@@ -3,7 +3,7 @@ import { getAllBankStatements } from './service'
 import List from './components/List'
 import LineChart from './components/LineChart'
 import PieChart from './components/PieChart'
-import { Card, Button, Row, Col } from 'antd'
+import { Card, Button, Row, Col, Upload } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
 import './App.css'
@@ -35,7 +35,11 @@ function App() {
           </Card>
         </Col>
         <Col span={24}>
-          <Card extra={<Button icon={<UploadOutlined />}>Click to Upload</Button>} className='transactionsList' bordered={false}>
+          <Card extra={
+            <Upload>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+          } className='transactionsList' bordered={false}>
             <List data={data} />
           </Card>
         </Col>
