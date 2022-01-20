@@ -1,5 +1,6 @@
 import React from 'react'
 import { Pie } from '@ant-design/plots'
+import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
 
 const PieChart = ({ data: planeData }) => {
@@ -8,8 +9,6 @@ const PieChart = ({ data: planeData }) => {
   const uniqueCategories = [...new Set(planeCategories)]
 
   uniqueCategories.map(i => data.push({ type: i, value: 0, count: 0 }))
-
-  console.log('ich', data)
 
   data.forEach(chartData => {
     const transactionsQuantity = Object.keys(planeData).length
@@ -27,6 +26,9 @@ const PieChart = ({ data: planeData }) => {
     data,
     angleField: 'value',
     colorField: 'type',
+    color: ({ type }) => {
+      return assignColorByCategory(type)
+    },
     radius: 0.8,
     label: {
       type: 'outer',
