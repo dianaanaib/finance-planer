@@ -3,20 +3,19 @@ import { Pie } from '@ant-design/plots'
 import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
 
-const PieChart = ({ data: planeData }) => {
+const PieChart = ({ data: plainData }) => {
   const [selected, setSelected] = useState(null)
 
   let data = []
   let outcome = []
   let income = []
 
-  console.log('data', data)
-  const planeCategories = planeData.map(i => i.category)
-  const uniqueCategories = [...new Set(planeCategories)]
+  const plainCategories = plainData.map(i => i.category)
+  const uniqueCategories = [...new Set(plainCategories)]
 
   uniqueCategories.map(i => data.push({ type: i, value: 0, outcomeSum: 0, incomeSum: 0 }))
 
-  planeData.forEach(item => {
+  plainData.forEach(item => {
     (item.bankStatement.amount < 0)
       ? outcome.push(item.bankStatement.amount)
       : income.push(item.bankStatement.amount)
@@ -35,7 +34,7 @@ const PieChart = ({ data: planeData }) => {
   }
 
   data.forEach(chartData => {
-    planeData.forEach(transaction => {
+    plainData.forEach(transaction => {
       if (transaction.category === chartData.type) {
         (transaction.bankStatement.amount < 0)
           ? increaseChartDataSumState(transaction.bankStatement.amount, 'outcome', chartData)
@@ -61,10 +60,13 @@ const PieChart = ({ data: planeData }) => {
     },
     interactions: [
       {
+        type: 'tooltip', enable: false
+      },
+      {
         type: 'pie-legend-active'
       },
       {
-        type: 'element-single-selected',
+        type: 'element-single-selected'
       },
       {
         type: 'element-active'
