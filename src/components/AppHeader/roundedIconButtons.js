@@ -1,7 +1,7 @@
 const RoundedIconButtons = () => {
   const IconLink = ({ src, text }) => (
-    <a className="example-link">
-      <img className="example-link-icon" src={src} alt={text} />
+    <a className='example-link'>
+      <img className='example-link-icon' src={src} alt={text} />
       {text}
     </a>
   );
@@ -9,16 +9,16 @@ const RoundedIconButtons = () => {
   return (
     <div className='roundedButtons'>
       <IconLink
-        src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-        text="Quick Start"
+        src='https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg'
+        text=' Quick Start'
       />
       <IconLink
-        src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-        text=" Product Info"
+        src='https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg'
+        text=' Product Info'
       />
       <IconLink
-        src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-        text="Product Doc"
+        src='https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg'
+        text=' Product Doc'
       />
     </div>
   )
