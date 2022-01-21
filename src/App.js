@@ -3,6 +3,7 @@ import { getAllBankStatements } from './service'
 import List from './components/List'
 import LineChart from './components/LineChart'
 import PieChart from './components/PieChart'
+import AppHeader from './components/AppHeader'
 import { Card, Button, Row, Col, Upload } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
@@ -22,8 +23,11 @@ function App() {
   }
 
   return (
-    <div className='chartContainer'>
+    <div className='appContainer'>
       <Row gutter={[25, 25]}>
+        <Col span={24}>
+          <AppHeader />
+        </Col>
         <Col span={12}>
           <Card bordered={false}>
             <PieChart data={data} />
