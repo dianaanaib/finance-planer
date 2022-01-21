@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Pie } from '@ant-design/plots'
 import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
 
 const PieChart = ({ data: planeData }) => {
+  const [selected, setSelected] = useState(null)
+  console.log('selected', selected)
+
   let data = []
   const planeCategories = planeData.map(i => i.category)
   const uniqueCategories = [...new Set(planeCategories)]
@@ -20,6 +23,8 @@ const PieChart = ({ data: planeData }) => {
 
     chartData.value = 100 * chartData.count / transactionsQuantity
   })
+
+
 
   const config = {
     appendPadding: 10,
@@ -39,10 +44,14 @@ const PieChart = ({ data: planeData }) => {
         type: 'pie-legend-active'
       },
       {
+        type: 'element-single-selected',
+      },
+      {
         type: 'element-active'
       }
     ]
   }
+
   return <Pie {...config} />
 }
 
