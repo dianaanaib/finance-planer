@@ -1,0 +1,9 @@
+div> .ant-page-header-ghost {
+    background-color: #fff;
+}
+
+div> .roundedButtons {
+    display: flex;
+    gap: 20px;
+    margin-top: 2em;
+}
