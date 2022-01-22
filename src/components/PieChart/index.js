@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Pie } from '@ant-design/plots'
 import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
+import { CodepenOutlined } from '@ant-design/icons'
 
 const PieChart = ({ data: plainData }) => {
   const [selected, setSelected] = useState(null)
@@ -45,6 +46,14 @@ const PieChart = ({ data: plainData }) => {
     chartData.value = 100 * chartData.outcomeSum / outcomeSum
   })
 
+  function renderStatistic(containerWidth, text, style) {
+    const R = containerWidth / 2; // r^2 = (w / 2)^2 + (h - offsetY)^2
+
+    const textStyleStr = `width:${containerWidth}px;`
+    return `<div style="${textStyleStr}}">${text}</div>`
+  }
+
+
   const config = {
     appendPadding: 10,
     data,
@@ -53,10 +62,34 @@ const PieChart = ({ data: plainData }) => {
     color: ({ type }) => {
       return assignColorByCategory(type)
     },
-    radius: 0.8,
+    radius: 1,
+    innerRadius: 0.64,
     label: {
       type: 'outer',
       content: '{percentage}'
+    },
+    statistic: {
+      title: {
+        offsetY: -4,
+        customHtml: (container, view, datum) => {
+          console.log('datum', datum)
+          return datum ? datum.type : 'Gesamt'
+        }
+      },
+      content: {
+        offsetY: 4,
+        style: {
+          fontSize: '32px'
+        },
+        customHtml: (container, view, datum, data) => {
+          const { width } = container.getBoundingClientRect()
+
+          const text = (datum && datum.outcomeSum) ? `${datum.outcomeSum}€` : `${outcomeSum}€`
+          return renderStatistic(width, text, {
+            fontSize: 32
+          })
+        }
+      }
     },
     interactions: [
       {
@@ -66,8 +99,9 @@ const PieChart = ({ data: plainData }) => {
         type: 'pie-legend-active'
       },
       {
-        type: 'element-single-selected'
+        type: 'element-selected'
       },
+      { type: 'pie-statistic-active' },
       {
         type: 'element-active'
       }
@@ -78,5 +112,3 @@ const PieChart = ({ data: plainData }) => {
 }
 
 export default PieChart
-
-
