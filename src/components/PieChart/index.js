@@ -46,13 +46,11 @@ const PieChart = ({ data: plainData }) => {
     chartData.value = 100 * chartData.outcomeSum / outcomeSum
   })
 
-  function renderStatistic(containerWidth, text, style) {
-    const R = containerWidth / 2; // r^2 = (w / 2)^2 + (h - offsetY)^2
-
+  const renderStatistic = (containerWidth, text, style) => {
     const textStyleStr = `width:${containerWidth}px;`
+
     return `<div style="${textStyleStr}}">${text}</div>`
   }
-
 
   const config = {
     appendPadding: 10,
@@ -72,22 +70,25 @@ const PieChart = ({ data: plainData }) => {
       title: {
         offsetY: -4,
         customHtml: (container, view, datum) => {
-          console.log('datum', datum)
-          return datum ? datum.type : 'Gesamt'
+          const { width } = container.getBoundingClientRect()
+
+          const text = (datum && datum.type) ? datum.type : 'Gesamt'
+          return renderStatistic(width, text)
         }
       },
       content: {
         offsetY: 4,
         style: {
-          fontSize: '32px'
+          fontSize: '30px'
         },
-        customHtml: (container, view, datum, data) => {
+        customHtml: (container, view, datum) => {
           const { width } = container.getBoundingClientRect()
+          const roundToTwoDecPlaces = (number) => number.toFixed(2)
 
-          const text = (datum && datum.outcomeSum) ? `${datum.outcomeSum}€` : `${outcomeSum}€`
-          return renderStatistic(width, text, {
-            fontSize: 32
-          })
+          const text = (datum && datum.outcomeSum)
+            ? `${roundToTwoDecPlaces(datum.outcomeSum)}€`
+            : `${roundToTwoDecPlaces(outcomeSum)}€`
+          return renderStatistic(width, text)
         }
       }
     },
