@@ -7,7 +7,7 @@ const LineChart = ({ data: planeData }) => {
   let data = []
 
   planeData.forEach(i => {
-    return data.push({ category: i.category, date: i.bankStatement.date, payments: (i.bankStatement.amount) })
+    return data.push({ category: i.category, date: i.date, payments: i.amount })
   })
 
   const config = {

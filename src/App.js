@@ -12,10 +12,14 @@ import "antd/dist/antd.css";
 
 function App() {
   const [data, setData] = useState(null)
+  const [categoryFilter, setCategoryFilter] = useState(null)
 
   useEffect(async () => {
     const result = await getAllBankStatements()
-    setData(result)
+    const parsedResult = result.map(i => {
+      return { ...i.bankStatement, amount: parseFloat(i.bankStatement.amount), category: i.category }
+    })
+    setData(parsedResult)
   }, [])
 
   if (data === null) {
@@ -30,7 +34,7 @@ function App() {
         </Col>
         <Col span={12}>
           <Card bordered={false}>
-            <PieChart data={data} />
+            <PieChart data={data} setCategoryFilter={setCategoryFilter} />
           </Card>
         </Col>
         <Col span={12}>
@@ -44,7 +48,7 @@ function App() {
               <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>
           } className='transactionsList' bordered={false}>
-            <List data={data} />
+            <List data={data} categoryFilter={categoryFilter} />
           </Card>
         </Col>
       </Row>

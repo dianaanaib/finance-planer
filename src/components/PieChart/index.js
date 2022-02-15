@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Pie } from '@ant-design/plots'
 import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
-import { CodepenOutlined } from '@ant-design/icons'
 
-const PieChart = ({ data: plainData }) => {
-  const [selected, setSelected] = useState(null)
-
+const PieChart = React.memo(({ data: plainData, setCategoryFilter }) => {
   let data = []
   let outcome = []
   let income = []
@@ -17,9 +14,9 @@ const PieChart = ({ data: plainData }) => {
   uniqueCategories.map(i => data.push({ type: i, value: 0, outcomeSum: 0, incomeSum: 0 }))
 
   plainData.forEach(item => {
-    (item.bankStatement.amount < 0)
-      ? outcome.push(item.bankStatement.amount)
-      : income.push(item.bankStatement.amount)
+    (item.amount < 0)
+      ? outcome.push(item.amount)
+      : income.push(item.amount)
   })
 
   const negativeOutcomeSum = outcome.reduce((a, b) => (a + b), 0)
@@ -37,9 +34,9 @@ const PieChart = ({ data: plainData }) => {
   data.forEach(chartData => {
     plainData.forEach(transaction => {
       if (transaction.category === chartData.type) {
-        (transaction.bankStatement.amount < 0)
-          ? increaseChartDataSumState(transaction.bankStatement.amount, 'outcome', chartData)
-          : increaseChartDataSumState(transaction.bankStatement.amount, 'income', chartData)
+        (transaction.amount < 0)
+          ? increaseChartDataSumState(transaction.amount, 'outcome', chartData)
+          : increaseChartDataSumState(transaction.amount, 'income', chartData)
       }
     })
 
@@ -79,7 +76,7 @@ const PieChart = ({ data: plainData }) => {
       content: {
         offsetY: 4,
         style: {
-          fontSize: '30px'
+          fontSize: '32px'
         },
         customHtml: (container, view, datum) => {
           const { width } = container.getBoundingClientRect()
@@ -100,9 +97,19 @@ const PieChart = ({ data: plainData }) => {
         type: 'pie-legend-active'
       },
       {
-        type: 'element-selected'
+        type: 'element-selected',
+        cfg: {
+          start: [{
+            trigger: 'element:click', action: (event) => {
+              const category = event?.event?.data?.data?.type
+              setCategoryFilter(category)
+            }
+          }]
+        }
       },
-      { type: 'pie-statistic-active' },
+      {
+        type: 'pie-statistic-active'
+      },
       {
         type: 'element-active'
       }
@@ -110,6 +117,6 @@ const PieChart = ({ data: plainData }) => {
   }
 
   return <Pie {...config} />
-}
+})
 
 export default PieChart
