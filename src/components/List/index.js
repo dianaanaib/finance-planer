@@ -4,10 +4,12 @@ import { assignColorByCategory } from '../../utils/colorAssign'
 
 import './index.css'
 
-const TransactionsList = ({ data }) => {
-  if (Array.isArray(data)) {
+const TransactionsList = ({ data, categoryFilter }) => {
+  const list = (categoryFilter) ? data.filter(i => i.category === categoryFilter) : data
+
+  if (Array.isArray(list)) {
     data.sort((a, b) => {
-      return new Date(b?.bankStatement?.date) - new Date(a?.bankStatement?.date)
+      return new Date(b?.date) - new Date(a?.date)
     })
   }
 
@@ -21,16 +23,20 @@ const TransactionsList = ({ data }) => {
     >
       <List
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={list}
         renderItem={item => {
-          const { bankStatement, category } = item || {}
-          const { date, name: orderName, amount } = bankStatement || {}
+          const { date, name: orderName, amount, category } = item || {}
           return <List.Item className="ant-list-item-no-flex">
             <Row>
               <Col span={4}>{date}</Col>
               <Col span={4}>{orderName}</Col>
               <Col span={1}><Tag color={assignColorByCategory(category)}>{category}</Tag></Col>
-              <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={15}>{amount}</Col>
+              <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={15}>
+                {(amount > 0)
+                  ? `+${amount}`
+                  : amount
+                }
+              </Col>
             </Row>
           </List.Item>
         }}
