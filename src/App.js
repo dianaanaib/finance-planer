@@ -13,6 +13,7 @@ function App() {
   const [data, setData] = useState(null)
   const [categoryFilter, setCategoryFilter] = useState(null)
   const [chartType, setChartType] = useState('outcome')
+  const isIncomeChartType = (chartType === 'income')
 
   useEffect(async () => {
     const result = await getAllBankStatements()
@@ -33,7 +34,7 @@ function App() {
           <AppHeader chartType={chartType} setChartType={setChartType} />
         </Col>
         <Col span={12}>
-          <Tooltip placement="topRight" color='#6395F9' title='Outcome Pie Chart'>
+          <Tooltip placement="topRight" color={(isIncomeChartType) ? '#63DAAB' : '#6395F9'} title={(isIncomeChartType) ? 'Income Pie Chart' : 'Outcome Pie Chart'}>
             <Card bordered={false}>
               <PieChart
                 pieType={chartType}
