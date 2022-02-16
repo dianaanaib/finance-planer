@@ -13,6 +13,8 @@ function App() {
   const [data, setData] = useState(null)
   const [categoryFilter, setCategoryFilter] = useState(null)
   const [chartType, setChartType] = useState('outcome')
+  const [isPieChartTooltipVisible, setIsPieChartTooltipVisible] = useState(false)
+  const [isLineChartTooltipVisible, setIsLineChartTooltipVisible] = useState(false)
   const isIncomeChartType = (chartType === 'income')
 
   useEffect(async () => {
@@ -22,6 +24,13 @@ function App() {
     })
     setData(parsedResult)
   }, [])
+
+  if (isPieChartTooltipVisible || isLineChartTooltipVisible) {
+    setTimeout(() => {
+      setIsPieChartTooltipVisible(false)
+      setIsLineChartTooltipVisible(false)
+    }, 1000);
+  }
 
   if (data === null) {
     return <div>Loading...</div>
@@ -34,7 +43,13 @@ function App() {
           <AppHeader chartType={chartType} setChartType={setChartType} />
         </Col>
         <Col span={12}>
-          <Tooltip placement="topRight" color={(isIncomeChartType) ? '#63DAAB' : '#6395F9'} title={(isIncomeChartType) ? 'Income Pie Chart' : 'Outcome Pie Chart'}>
+          <Tooltip
+            visible={isPieChartTooltipVisible}
+            onMouseEnter={() => setIsPieChartTooltipVisible(true)}
+            placement="topRight"
+            color={(isIncomeChartType) ? '#63DAAB' : '#6395F9'}
+            title={(isIncomeChartType) ? 'Income Pie Chart' : 'Outcome Pie Chart'}
+          >
             <Card bordered={false}>
               <PieChart
                 pieType={chartType}
@@ -46,7 +61,11 @@ function App() {
           </Tooltip>
         </Col>
         <Col span={12}>
-          <Tooltip placement="topRight" color='#6395F9' title='Outcome Line Chart'>
+          <Tooltip
+            visible={isLineChartTooltipVisible}
+            onMouseEnter={() => setIsLineChartTooltipVisible(true)}
+            placement="topRight" color='#6395F9' title='Outcome Line Chart'
+          >
             <Card bordered={false}>
               <LineChart data={data} />
             </Card>
