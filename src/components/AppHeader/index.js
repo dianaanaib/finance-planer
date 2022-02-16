@@ -2,8 +2,9 @@ import { PageHeader, Tag, Avatar } from 'antd';
 import './index.css';
 import DropdownMenu from './dropdownMenu';
 import RoundedIconButtons from './roundedIconButtons';
+import ChartToolbar from './chartToolbar'
 
-const AppHeader = () => {
+const AppHeader = ({ chartType, setChartType }) => {
 
 
   return (
@@ -11,8 +12,8 @@ const AppHeader = () => {
       <PageHeader
         className='pageHeader'
         title="Finance Space"
-        subTitle="Unearthly reliability"
-        tags={<Tag color="#6395F9">Running</Tag>}
+        subTitle="Unearthly Reliability"
+        tags={<Tag color="#63DAAB">Running</Tag>}
         extra={[
           <div>
             <Avatar src="https://joeschmoe.io/api/v1/random" />
@@ -24,7 +25,10 @@ const AppHeader = () => {
         ]}
       >
       </PageHeader>
-      <RoundedIconButtons />
+      <div className='underHeadContainer'>
+        <RoundedIconButtons />
+        <ChartToolbar chartType={chartType} setChartType={setChartType} />
+      </div>
     </>
   )
 }

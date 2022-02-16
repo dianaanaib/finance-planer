@@ -11,3 +11,18 @@ div> .roundedButtons {
 div> .ant-page-header-heading-left {
     display: block;
 }
+
+.underHeadContainer {
+    display: flex;
+}
+
+.underHeadContainer .chartToolbar {
+    display: flex;
+    margin-left: auto;
+    align-self: flex-end;
+    gap: 20px;
+}
+
+.chartToolbar svg {
+    cursor: pointer;
+}

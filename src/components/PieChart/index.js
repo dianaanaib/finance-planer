@@ -20,7 +20,8 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
   })
 
   const negativeOutcomeSum = outcome.reduce((a, b) => (a + b), 0)
-  const outcomeSum = Math.abs(negativeOutcomeSum)
+  const generalOutcomeSum = Math.abs(negativeOutcomeSum)
+  const generalIncomeSum = income.reduce((a, b) => (a + b), 0)
 
   const increaseChartDataSumState = (amount, status, chartData) => {
     const convertedAmount = Math.abs(amount)
@@ -40,7 +41,9 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
       }
     })
 
-    chartData.value = 100 * chartData.outcomeSum / outcomeSum
+    chartData.value = (pieType === 'income')
+      ? 100 * chartData.incomeSum / generalIncomeSum
+      : 100 * chartData.outcomeSum / generalOutcomeSum
   })
 
   const data = (pieType === 'income')
@@ -87,7 +90,7 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
           const roundToTwoDecPlaces = (number) => number.toFixed(2)
           const text = (datum && datum.outcomeSum > 0)
             ? `${roundToTwoDecPlaces(datum.outcomeSum)}€`
-            : `${roundToTwoDecPlaces(outcomeSum)}€`
+            : `${roundToTwoDecPlaces(generalOutcomeSum)}€`
 
           return renderStatistic(width, text)
         }
