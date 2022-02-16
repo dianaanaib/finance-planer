@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Pie } from '@ant-design/plots'
 import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
 
-const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilter }) => {
-  let data = []
+const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilter, pieType }) => {
+  let configurationData = []
   let outcome = []
   let income = []
 
   const plainCategories = plainData.map(i => i.category)
   const uniqueCategories = [...new Set(plainCategories)]
 
-  uniqueCategories.map(i => data.push({ type: i, value: 0, outcomeSum: 0, incomeSum: 0 }))
+  uniqueCategories.map(i => configurationData.push({ type: i, value: 0, outcomeSum: 0, incomeSum: 0 }))
 
   plainData.forEach(item => {
     (item.amount < 0)
@@ -31,7 +31,7 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
     return chartData.incomeSum = chartData.incomeSum + amount
   }
 
-  data.forEach(chartData => {
+  configurationData.forEach(chartData => {
     plainData.forEach(transaction => {
       if (transaction.category === chartData.type) {
         (transaction.amount < 0)
@@ -42,6 +42,10 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
 
     chartData.value = 100 * chartData.outcomeSum / outcomeSum
   })
+
+  const data = (pieType === 'income')
+    ? configurationData.filter(chartData => chartData.incomeSum > 0)
+    : configurationData.filter(chartData => chartData.outcomeSum > 0)
 
   const renderStatistic = (containerWidth, text, style) => {
     const textStyleStr = `width:${containerWidth}px;`
@@ -81,10 +85,10 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
         customHtml: (container, view, datum) => {
           const { width } = container.getBoundingClientRect()
           const roundToTwoDecPlaces = (number) => number.toFixed(2)
-
-          const text = (datum && datum.outcomeSum)
+          const text = (datum && datum.outcomeSum > 0)
             ? `${roundToTwoDecPlaces(datum.outcomeSum)}€`
             : `${roundToTwoDecPlaces(outcomeSum)}€`
+
           return renderStatistic(width, text)
         }
       }
@@ -103,7 +107,6 @@ const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilte
             trigger: 'element:click', action: (event) => {
               const categoryName = event?.event?.data?.data?.type
               const category = (categoryFilter !== categoryName) ? categoryName : null
-
               setCategoryFilter(category)
             }
           }]
