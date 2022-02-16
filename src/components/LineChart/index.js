@@ -3,7 +3,7 @@ import { assignColorByCategory } from '../../utils/colorAssign'
 import { Line } from '@ant-design/plots'
 import './index.css'
 
-const LineChart = ({ data: planeData }) => {
+const LineChart = React.memo(({ data: planeData }) => {
   let data = []
 
   planeData.forEach(i => {
@@ -31,6 +31,6 @@ const LineChart = ({ data: planeData }) => {
   }
 
   return <Line {...config} />
-};
+})
 
 export default LineChart
