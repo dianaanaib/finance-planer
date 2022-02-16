@@ -34,7 +34,7 @@ function App() {
         </Col>
         <Col span={12}>
           <Card bordered={false}>
-            <PieChart data={data} setCategoryFilter={setCategoryFilter} />
+            <PieChart data={data} categoryFilter={categoryFilter} setCategoryFilter={setCategoryFilter} />
           </Card>
         </Col>
         <Col span={12}>

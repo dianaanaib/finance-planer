@@ -3,7 +3,7 @@ import { Pie } from '@ant-design/plots'
 import { assignColorByCategory } from '../../utils/colorAssign'
 import './index.css'
 
-const PieChart = React.memo(({ data: plainData, setCategoryFilter }) => {
+const PieChart = React.memo(({ data: plainData, categoryFilter, setCategoryFilter }) => {
   let data = []
   let outcome = []
   let income = []
@@ -101,7 +101,9 @@ const PieChart = React.memo(({ data: plainData, setCategoryFilter }) => {
         cfg: {
           start: [{
             trigger: 'element:click', action: (event) => {
-              const category = event?.event?.data?.data?.type
+              const categoryName = event?.event?.data?.data?.type
+              const category = (categoryFilter !== categoryName) ? categoryName : null
+
               setCategoryFilter(category)
             }
           }]
