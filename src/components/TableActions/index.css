@@ -5,4 +5,9 @@
 
 .tableViewSwitch svg {
     cursor: pointer;
+    transition:  0.2s linear; 
+}
+
+.tableViewSwitch svg:hover {
+    color: #1890ff;
 }
