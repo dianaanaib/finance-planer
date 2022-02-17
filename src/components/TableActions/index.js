@@ -1,11 +1,17 @@
 import { FileDoneOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import './index.css'
 
-const TableActions = () => {
+const TableActions = ({ setIsChosenList }) => {
 	return (
 		<div className='tableViewSwitch'>
-			<UnorderedListOutlined style={{ fontSize: '18px' }} />
-			<FileDoneOutlined style={{ fontSize: '18px' }} />
+			<UnorderedListOutlined
+				onClick={() => setIsChosenList('transactions')}
+				style={{ fontSize: '18px' }}
+			/>
+			<FileDoneOutlined
+				onClick={() => setIsChosenList('uploadedFiles')}
+				style={{ fontSize: '18px' }}
+			/>
 		</div>
 	)
 }
