@@ -31,7 +31,7 @@ const TransactionList = ({ data, categoryFilter }) => {
               <Col span={4}>{date}</Col>
               <Col span={4}>{orderName}</Col>
               <Col span={1}><Tag color={assignColorByCategory(category)}>{category}</Tag></Col>
-              <Col style={{ textAlign: "right", color: amount > 0 ? "green" : "red" }} span={15}>
+              <Col style={{ textAlign: "right", color: amount > 0 ? "#389e0d" : "#f5222d" }} span={15}>
                 {(amount > 0)
                   ? `+${amount}`
                   : amount

@@ -4,5 +4,6 @@ export const COLOR_PLATE = {
     Lebensmittel: '#63DAAB',
     Kleidung: '#74CBED',
     'Elektronische Geräte': '#7666F9',
+    Lohn: '#EC8166',
     default: '#FFFFFF'
 }
