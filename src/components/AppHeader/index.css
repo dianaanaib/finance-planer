@@ -28,6 +28,14 @@ div> .ant-page-header-heading-left {
     transition:  0.2s linear; 
 }
 
-.chartToolbar svg:hover {
+.chartToolbar .fundViewOutlined svg:hover {
     color: #1890ff;
+}
+
+.chartToolbar .fallOutlined svg:hover {
+    color: #51bde7;
+}
+
+.chartToolbar .riseOutlined svg:hover {
+    color: #63DAAB;
 }
