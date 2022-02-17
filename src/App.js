@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getAllBankStatements } from './service'
-import List from './components/List'
+import { getAllBankStatements, getAllUploadedFiles } from './service'
+import TransactionList from './components/TransactionList'
+import FileList from './components/FileList'
 import LineChart from './components/LineChart'
 import PieChart from './components/PieChart'
 import AppHeader from './components/AppHeader'
@@ -13,10 +14,12 @@ import "antd/dist/antd.css"
 
 function App() {
   const [data, setData] = useState(null)
+  const [fileData, setFileData] = useState(null)
   const [categoryFilter, setCategoryFilter] = useState(null)
   const [chartType, setChartType] = useState('outcome')
   const [isPieChartTooltipVisible, setIsPieChartTooltipVisible] = useState(false)
   const [isLineChartTooltipVisible, setIsLineChartTooltipVisible] = useState(false)
+  const [isChosenList, setIsChosenList] = useState('transactions')
   const isIncomeChartType = (chartType === 'income')
 
   useEffect(async () => {
@@ -25,6 +28,11 @@ function App() {
       return { ...i.bankStatement, amount: parseFloat(i.bankStatement.amount), category: i.category }
     })
     setData(parsedResult)
+  }, [])
+
+  useEffect(async () => {
+    const result = await getAllUploadedFiles()
+    setFileData(result)
   }, [])
 
   if (isPieChartTooltipVisible) {
@@ -79,8 +87,21 @@ function App() {
           </Tooltip>
         </Col>
         <Col span={24}>
-          <Card title={<TableActions />} extra={<UploadButton />} className='transactionsList' bordered={false}>
-            <List data={data} categoryFilter={categoryFilter} />
+          <Card
+            title={
+              <TableActions
+                setIsChosenList={setIsChosenList}
+              />
+            }
+            extra={<UploadButton />}
+            className='transactionsList'
+            bordered={false}
+          >
+            {
+              (isChosenList === 'uploadedFiles')
+                ? <FileList data={fileData} />
+                : <TransactionList data={data} categoryFilter={categoryFilter} />
+            }
           </Card>
         </Col>
       </Row>
