@@ -4,10 +4,12 @@ import List from './components/List'
 import LineChart from './components/LineChart'
 import PieChart from './components/PieChart'
 import AppHeader from './components/AppHeader'
-import { Card, Button, Row, Col, Upload, Tooltip } from 'antd'
-import { UploadOutlined } from '@ant-design/icons'
+import { Card, Row, Col, Tooltip } from 'antd'
+import UploadButton from './components/UploadButton'
+import TableActions from './components/TableActions'
+
 import './App.css'
-import "antd/dist/antd.css";
+import "antd/dist/antd.css"
 
 function App() {
   const [data, setData] = useState(null)
@@ -25,9 +27,14 @@ function App() {
     setData(parsedResult)
   }, [])
 
-  if (isPieChartTooltipVisible || isLineChartTooltipVisible) {
+  if (isPieChartTooltipVisible) {
     setTimeout(() => {
       setIsPieChartTooltipVisible(false)
+    }, 1000);
+  }
+
+  if (isLineChartTooltipVisible) {
+    setTimeout(() => {
       setIsLineChartTooltipVisible(false)
     }, 1000);
   }
@@ -72,11 +79,7 @@ function App() {
           </Tooltip>
         </Col>
         <Col span={24}>
-          <Card extra={
-            <Upload>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
-          } className='transactionsList' bordered={false}>
+          <Card title={<TableActions />} extra={<UploadButton />} className='transactionsList' bordered={false}>
             <List data={data} categoryFilter={categoryFilter} />
           </Card>
         </Col>
