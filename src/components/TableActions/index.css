@@ -1,0 +1,8 @@
+.tableViewSwitch {
+    display: flex;
+    gap: 30px;
+}
+
+.tableViewSwitch svg {
+    cursor: pointer;
+}
