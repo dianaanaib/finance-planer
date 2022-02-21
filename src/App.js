@@ -51,6 +51,9 @@ function App() {
     return <div>Loading...</div>
   }
 
+  let pieChartTimer = 0
+  let lineChartTime = 0
+
   return (
     <div className='appContainer'>
       <Row gutter={[25, 25]}>
@@ -60,7 +63,12 @@ function App() {
         <Col span={12}>
           <Tooltip
             visible={isPieChartTooltipVisible}
-            onMouseEnter={() => setIsPieChartTooltipVisible(true)}
+            onMouseEnter={() => {
+              pieChartTimer = setTimeout(() => {
+                setIsPieChartTooltipVisible(true)
+              }, 1000)
+            }}
+            onMouseLeave={() => { setIsPieChartTooltipVisible(false); clearTimeout(pieChartTimer) }}
             placement="topRight"
             color={(isIncomeChartType) ? '#63DAAB' : '#6395F9'}
             title={(isIncomeChartType) ? 'Income Pie Chart' : 'Outcome Pie Chart'}
@@ -78,7 +86,12 @@ function App() {
         <Col span={12}>
           <Tooltip
             visible={isLineChartTooltipVisible}
-            onMouseEnter={() => setIsLineChartTooltipVisible(true)}
+            onMouseEnter={() => {
+              lineChartTime = setTimeout(() => {
+                setIsLineChartTooltipVisible(true)
+              }, 1000)
+            }}
+            onMouseLeave={() => { setIsLineChartTooltipVisible(false); clearTimeout(lineChartTime) }}
             placement="topRight" color='#6395F9' title='Outcome Line Chart'
           >
             <Card bordered={false}>
