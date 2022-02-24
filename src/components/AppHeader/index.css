@@ -59,8 +59,9 @@ div> .ant-page-header-heading-left {
 .chartsMenuContainer:hover {
    border-radius: 30px;
     padding: 3px;
-   border: 2px #fff solid;
+   border: 1.3px #fff solid;
    transition-delay:0.1s;
+   background-color: #dee5e98f;
 }
 
 .chartsMenuContainer:hover .chartsGroup {
@@ -75,7 +76,7 @@ div> .ant-page-header-heading-left {
     border-radius: 30px;
     color: #42bff0;
     padding: 6px;
-     transition-delay:0.1s;
+    
 }
 .chartsMenuContainer:hover .fundViewOutlined > svg {
     cursor: default;
