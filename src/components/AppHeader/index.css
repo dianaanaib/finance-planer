@@ -14,22 +14,21 @@ div> .ant-page-header-heading-left {
 
 .underHeadContainer {
     display: flex;
+    height: 3.7em;
 }
 
 .underHeadContainer .chartToolbar {
     display: flex;
+    align-items: center;
     margin-left: auto;
-    align-self: flex-end;
+    margin-top: 2em;
     gap: 30px;
+    
 }
 
 .chartToolbar svg {
     cursor: pointer;
     transition:  0.2s linear; 
-}
-
-.chartToolbar .fundViewOutlined svg:hover {
-    color: #1890ff;
 }
 
 .chartToolbar .fallOutlined svg:hover {
@@ -38,4 +37,50 @@ div> .ant-page-header-heading-left {
 
 .chartToolbar .riseOutlined svg:hover {
     color: #63DAAB;
+}
+
+.chartsGroup span {
+    margin-left: 20px;
+}
+
+.chartsMenuContainer {
+    align-items: center;
+   display: flex;
+   transition:  0.1s;
+   border-color: #fff;
+}
+
+.chartsGroup {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.chartsMenuContainer:hover {
+   border-radius: 30px;
+    padding: 3px;
+   border: 2px #fff solid;
+   transition-delay:0.1s;
+}
+
+.chartsMenuContainer:hover .chartsGroup {
+    font-size: 20px;
+    height:auto;
+    width: auto;
+  
+}
+
+.chartsMenuContainer:hover .fundViewOutlined {
+    background-color: #fff;
+    border-radius: 30px;
+    color: #42bff0;
+    padding: 6px;
+     transition-delay:0.1s;
+}
+.chartsMenuContainer:hover .fundViewOutlined > svg {
+    cursor: default;
+}
+
+.chartsGroup svg:hover {
+    color: #53c7f5;
 }
