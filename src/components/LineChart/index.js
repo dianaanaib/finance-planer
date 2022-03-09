@@ -7,13 +7,13 @@ const LineChart = React.memo(({ data: planeData }) => {
   let data = []
 
   planeData.forEach(i => {
-    return data.push({ category: i.category, date: i.date, payments: i.amount })
+    return data.push({ category: i.category, date: i.date, payment: i.amount })
   })
 
   const config = {
     data,
     xField: 'date',
-    yField: 'payments',
+    yField: 'payment',
     seriesField: 'category',
     yAxis: {
       label: {

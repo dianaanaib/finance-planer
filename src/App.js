@@ -210,7 +210,7 @@ function App() {
             placement="topRight" color='#6395F9' title='Outcome Stacked Area Chart'
           >
             <Card bordered={false}>
-              <StackedAreaChart />
+              <StackedAreaChart data={data} />
             </Card>
           </Tooltip>
         </Col>

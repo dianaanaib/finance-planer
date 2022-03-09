@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { Column } from '@ant-design/plots';
+import { assignColorByCategory } from '../../utils/colorAssign'
 
-const DemoColumn = ({ data: planeData }) => {
+const DemoColumn = React.memo(({ data: planeData }) => {
     let data = []
-    console.log('dataaaaaa', data)
+
     planeData.forEach(i => {
         return data.push({ category: i.category, date: i.date, payment: i.amount })
     })
@@ -13,6 +13,10 @@ const DemoColumn = ({ data: planeData }) => {
         data,
         xField: 'date',
         yField: 'payment',
+        seriesField: 'category',
+        color: ({ category }) => {
+            return assignColorByCategory(category)
+        },
         xAxis: {
             label: {
                 autoRotate: false,
@@ -24,7 +28,7 @@ const DemoColumn = ({ data: planeData }) => {
         },
     };
 
-    return <Column {...config} />;
-};
+    return <Column {...config} />
+});
 
 export default DemoColumn

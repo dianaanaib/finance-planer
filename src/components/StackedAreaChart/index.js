@@ -1,34 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import { assignColorByCategory } from '../../utils/colorAssign'
 import { Area } from '@ant-design/plots';
 
-const DemoArea = () => {
-	const [data, setData] = useState([]);
+const DemoArea = React.memo(({ data: planeData }) => {
+	let data = []
 
-	useEffect(() => {
-		asyncFetch();
-	}, []);
+	planeData.forEach(i => {
+		return data.push({ category: i.category, date: i.date, payment: i.amount })
+	})
 
-	const asyncFetch = () => {
-		fetch('https://gw.alipayobjects.com/os/bmw-prod/b21e7336-0b3e-486c-9070-612ede49284e.json')
-			.then((response) => response.json())
-			.then((json) => setData(json))
-			.catch((error) => {
-				console.log('fetch data failed', error);
-			});
-	};
 	const config = {
 		data,
 		xField: 'date',
-		yField: 'value',
-		seriesField: 'country',
+		yField: 'payment',
+		seriesField: 'category',
 		slider: {
 			start: 0.1,
 			end: 0.9,
 		},
+		color: ({ category }) => {
+			return assignColorByCategory(category)
+		},
 	};
 
 	return <Area {...config} />;
-};
+});
 
 export default DemoArea
