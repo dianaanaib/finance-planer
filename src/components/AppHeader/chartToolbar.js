@@ -11,27 +11,29 @@ import {
 } from '@ant-design/icons'
 
 const ChartToolbar = ({ chartType, setChartType, onChartClick, activeCharts }) => {
-
-	console.log('activeCharts', activeCharts)
 	const isActiveChart = (chartName) => Boolean(activeCharts?.find(chart => chart === chartName))
 
 	return (
 		<div className='chartToolbar'>
 			{
-				(chartType === 'outcome')
-					? <Tooltip title='Switch outcome to income' mouseEnterDelay={1.5} mouseLeaveDelay={0.3}>
-						<FallOutlined
-							className='fallOutlined'
-							style={{ fontSize: '20px', color: '#1890ff' }}
-							onClick={() => setChartType('income')} />
-					</Tooltip>
-					: <Tooltip title='Switch income to outcome' mouseEnterDelay={1.5} mouseLeaveDelay={0.3}>
-						<RiseOutlined
-							className='riseOutlined'
-							style={{ fontSize: '20px', color: '#4cb68b' }}
-							onClick={() => setChartType('outcome')}
-						/>
-					</Tooltip>
+				(isActiveChart('pie') && chartType === 'outcome')
+				&& <Tooltip title='Switch outcome to income' mouseEnterDelay={1.5} mouseLeaveDelay={0.3}>
+					<FallOutlined
+						className='fallOutlined'
+						style={{ fontSize: '20px', color: '#1890ff' }}
+						onClick={() => setChartType('income')}
+					/>
+				</Tooltip>
+			}
+			{
+				(isActiveChart('pie') && chartType === 'income')
+				&& <Tooltip title='Switch income to outcome' mouseEnterDelay={1.5} mouseLeaveDelay={0.3}>
+					<RiseOutlined
+						className='riseOutlined'
+						style={{ fontSize: '20px', color: '#4cb68b' }}
+						onClick={() => setChartType('outcome')}
+					/>
+				</Tooltip>
 			}
 			<div className='chartsMenuContainer'>
 				<FundViewOutlined
