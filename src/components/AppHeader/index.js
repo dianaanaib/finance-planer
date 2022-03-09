@@ -4,7 +4,7 @@ import DropdownMenu from './dropdownMenu';
 import RoundedIconButtons from './roundedIconButtons';
 import ChartToolbar from './chartToolbar'
 
-const AppHeader = ({ chartType, setChartType }) => {
+const AppHeader = ({ chartType, setChartType, onChartClick, activeCharts }) => {
 
 
   return (
@@ -27,7 +27,7 @@ const AppHeader = ({ chartType, setChartType }) => {
       </PageHeader>
       <div className='underHeadContainer'>
         <RoundedIconButtons />
-        <ChartToolbar chartType={chartType} setChartType={setChartType} />
+        <ChartToolbar activeCharts={activeCharts} onChartClick={onChartClick} chartType={chartType} setChartType={setChartType} />
       </div>
     </>
   )

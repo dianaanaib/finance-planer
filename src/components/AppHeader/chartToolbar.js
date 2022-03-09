@@ -10,7 +10,10 @@ import {
 	LineChartOutlined
 } from '@ant-design/icons'
 
-const ChartToolbar = ({ chartType, setChartType }) => {
+const ChartToolbar = ({ chartType, setChartType, onChartClick, activeCharts }) => {
+
+	console.log('activeCharts', activeCharts)
+	const isActiveChart = (chartName) => Boolean(activeCharts?.find(chart => chart === chartName))
 
 	return (
 		<div className='chartToolbar'>
@@ -29,7 +32,6 @@ const ChartToolbar = ({ chartType, setChartType }) => {
 							onClick={() => setChartType('outcome')}
 						/>
 					</Tooltip>
-
 			}
 			<div className='chartsMenuContainer'>
 				<FundViewOutlined
@@ -37,7 +39,18 @@ const ChartToolbar = ({ chartType, setChartType }) => {
 					style={{ fontSize: '20px' }}
 				/>
 				<div className='chartsGroup'>
-					<PieChartOutlined /><LineChartOutlined /><BarChartOutlined /><AreaChartOutlined />
+					<PieChartOutlined
+						style={isActiveChart('pie') ? { color: '#53c7f5' } : { color: 'black' }}
+						onClick={() => onChartClick('pie')} />
+					<LineChartOutlined
+						style={isActiveChart('line') ? { color: '#53c7f5' } : { color: 'black' }}
+						onClick={() => onChartClick('line')} />
+					<BarChartOutlined
+						style={isActiveChart('column') ? { color: '#53c7f5' } : { color: 'black' }}
+						onClick={() => onChartClick('column')} />
+					<AreaChartOutlined
+						style={isActiveChart('stackedArea') ? { color: '#53c7f5' } : { color: 'black' }}
+						onClick={() => onChartClick('stackedArea')} />
 				</div>
 			</div>
 		</div>
