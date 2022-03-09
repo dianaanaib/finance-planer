@@ -189,7 +189,7 @@ function App() {
             placement="topRight" color='#6395F9' title='Outcome Column Chart'
           >
             <Card bordered={false}>
-              <ColumnChart />
+              <ColumnChart data={data} />
             </Card>
           </Tooltip>
         </Col>
