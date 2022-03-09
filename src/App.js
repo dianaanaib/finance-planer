@@ -28,8 +28,6 @@ function App() {
   const isIncomeChartType = (chartType === 'income')
 
   const [activeCharts, setActiveCharts] = useState(['pie', 'line'])
-  console.log('activeCharts', activeCharts)
-
   const getActiveCharts = async () => {
     try {
       return await AsyncStorage.getItem('chartsState');
