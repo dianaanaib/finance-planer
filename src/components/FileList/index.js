@@ -2,7 +2,6 @@ import React from 'react'
 import { Col, List, Row } from 'antd'
 
 const FileList = ({ data }) => {
-	console.log('data', data)
 	return (
 		<div
 			id="scrollableDiv"
