@@ -37,7 +37,6 @@ function App() {
   };
 
   const changeActiveCharts = async (charts) => {
-    console.log('chartsInFunc', charts)
     try {
       await AsyncStorage.setItem('chartsState', charts);
     } catch (error) {

@@ -7,7 +7,9 @@ const ProductDoc = ({ isModalVisible, setIsModalVisible }) => {
 
   return (
     <Modal
-      title="Product Documentation"
+      title={
+        <div style={{ color: '#6294F9' }}>Product Documentation</div>
+      }
       visible={isModalVisible}
       closable={false}
       footer={
