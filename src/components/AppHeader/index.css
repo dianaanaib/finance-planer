@@ -85,3 +85,8 @@ div> .ant-page-header-heading-left {
 .chartsGroup svg:hover {
     color: #53c7f5;
 }
+
+.activeChartIcon {
+    color: #53c7f5;
+}
+

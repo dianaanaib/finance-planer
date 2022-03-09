@@ -13,6 +13,5 @@ export async function getAllUploadedFiles() {
             'accept': 'application/json',
         }
     })
-    console.log('res', response)
     return response.json()
 }
